@@ -4,7 +4,7 @@
 	</div>
 	<div class="col-md-4 shipping-grid">
 		<div class="shipping">
-			<img src="images/shipping.png" alt="" />
+			<img src="<?= bloginfo( 'template_url' ) ?>/assets/images/shipping.png" alt="" />
 		</div>
 		<div class="shipping-text">
 			<h3>Free Shipping</h3>

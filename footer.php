@@ -58,7 +58,7 @@
 				</div>
 			</div>
 			<div class="cards text-center">
-				<img src="images/cards.jpg" alt="" />
+				<img src="<?= bloginfo( 'template_url' ) ?>/assets/images/cards.jpg" alt="" />
 			</div>
 			<div class="copyright text-center">
 				<p>&copy; <?= date( 'Y' ) ?> <?php printf( __( 'Eshop. All Rights Reserved %s Design by', 'shop' ), '|' ) ?>   <a href="http://w3layouts.com">  W3layouts</a></p>
