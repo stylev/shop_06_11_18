@@ -1,37 +1,25 @@
 <div class="other-products">
 	<div class="container">
-		<h3 class="like text-center">Featured Collection</h3>      			
-		<ul id="flexiselDemo3">
-			<li><a href="single.html"><img src="images/l1.jpg" class="img-responsive" alt="" /></a>
-				<div class="product liked-product simpleCart_shelfItem">
-					<a class="like_name" href="single.html">perfectly simple</a>
-					<p><a class="item_add" href="#"><i></i> <span class=" item_price">$759</span></a></p>
-				</div>
-			</li>
-			<li><a href="single.html"><img src="images/l2.jpg" class="img-responsive" alt="" /></a>						
-				<div class="product liked-product simpleCart_shelfItem">
-					<a class="like_name" href="single.html">praising pain</a>
-					<p><a class="item_add" href="#"><i></i> <span class=" item_price">$699</span></a></p>
-				</div>
-			</li>
-			<li><a href="single.html"><img src="images/l3.jpg" class="img-responsive" alt="" /></a>
-				<div class="product liked-product simpleCart_shelfItem">
-					<a class="like_name" href="single.html">Neque porro</a>
-					<p><a class="item_add" href="#"><i></i> <span class=" item_price">$329</span></a></p>
-				</div>
-			</li>
-			<li><a href="single.html"><img src="images/l4.jpg" class="img-responsive" alt="" /></a>
-				<div class="product liked-product simpleCart_shelfItem">
-					<a class="like_name" href="single.html">equal blame</a>
-					<p><a class="item_add" href="#"><i></i> <span class=" item_price">$499</span></a></p>
-				</div>
-			</li>
-			<li><a href="single.html"><img src="images/l5.jpg" class="img-responsive" alt="" /></a>
-				<div class="product liked-product simpleCart_shelfItem">
-					<a class="like_name" href="single.html">perfectly simple</a>
-					<p><a class="item_add" href="#"><i></i> <span class=" item_price">$649</span></a></p>
-				</div>
-			</li>
-		</ul>
+		<h3 class="like text-center"><?= _e( 'Featured Collection', 'shop' ) ?></h3>
+		<?php $bottom_slider_products = new WP_Query( 'post_type=product&posts_per_page=5&orderby=rand' ) ?>
+		<?php if ( $bottom_slider_products->have_posts() ) : ?>
+			<ul id="flexiselDemo3">
+				<?php while ( $bottom_slider_products->have_posts() ) : $bottom_slider_products->the_post(); ?>
+					<li>
+						<a href="<?= the_permalink() ?>">
+							<?php
+							remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
+							do_action( 'woocommerce_before_shop_loop_item_title' );
+							echo getProductImage( 'bottom_slider_img', ['class' => 'img-responsive'] );
+							?>
+						</a>
+						<div class="product liked-product simpleCart_shelfItem">
+							<a class="like_name" href="<?= the_permalink() ?>"><?= the_title() ?></a>
+							<?php addToCartBottomSlider() ?>
+						</div>
+					</li>
+				<?php endwhile; ?>
+			</ul>
+		<?php endif; ?>
 	</div>
 </div>
