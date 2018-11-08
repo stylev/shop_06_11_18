@@ -15,8 +15,9 @@ function getProductImage( $size = '', $attr = [] ) {
 	return $img;
 }
 
-add_image_size( 'shop_page_loop_img', 349, 349, false );
-add_image_size( 'bottom_slider_img', 277, 396, false );
+add_image_size( 'shop_page_loop_img', 349, 349, true );
+add_image_size( 'bottom_slider_img', 277, 396, true );
+add_image_size( 'cart_img', 228, 228, true );
 
 /**
 *	bottom slider, add to cart
@@ -93,3 +94,32 @@ add_action( 'init', function () {
 	global $woocommerce;
 	if ( isset( $_GET['empty-cart'] ) ) $woocommerce->cart->empty_cart();
 } );
+
+/**
+*	breadcrumbs
+*/
+
+add_filter( 'woocommerce_breadcrumb_defaults', function ( $args ) {
+	if ( ! is_product_category() ) {
+		$args = [
+			'delimiter'   => '&nbsp;<span>&gt;</span>',
+			'wrap_before' => '<div class="dreamcrub"><ul class="breadcrumbs">',
+			'wrap_after'  => '</ul><ul class="previous"><li><a href="' . $_SERVER['HTTP_REFERER'] . '">' . __( 'Back to Previous Page', 'shop' ) . '</a></li></ul><div class="clearfix"></div>
+</div>',
+			'before'      => '',
+			'after'       => '</li>',
+			'home'        => _x( 'Home', 'breadcrumb', 'woocommerce' )
+		];
+	} else {
+		$args = [
+			'delimiter'   => '&nbsp;<span>&gt;</span>',
+			'wrap_before' => '<nav class="woocommerce-breadcrumb">',
+			'wrap_after'  => '</nav>',
+			'before'      => '',
+			'after'       => '',
+			'home'        => _x( 'Home', 'breadcrumb', 'woocommerce' )
+		];
+	}
+	return $args;
+} );
+	
