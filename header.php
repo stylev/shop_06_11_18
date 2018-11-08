@@ -24,16 +24,19 @@
 						<?php else : ?>
 							<li><a href="<?= wc_logout_url() ?>"><span class="glyphicon glyphicon-log-out"> </span><?php _e( 'Logout' ) ?></a></li>
 						<?php endif; ?>
+						<li>
+							<?php
+							pll_the_languages( [
+								'show_names' => 0,
+								'show_flags' => 1,
+								'hide_current' => 1
+							] );
+							?>		
+						</li>
 					</ul>
 				</div>
 				<div class="header-right">
-					<div class="cart box_1">
-						<a href="checkout.html">
-							<h3> <span class="simpleCart_total"> $0.00 </span> (<span id="simpleCart_quantity" class="simpleCart_quantity"> 0 </span>)<img src="<?= bloginfo( 'template_url' ) ?>/assets/images/bag.png" alt=""></h3>
-						</a>	
-						<p><a href="javascript:;" class="simpleCart_empty">Empty cart</a></p>
-						<div class="clearfix"> </div>
-					</div>
+					<?= the_widget( 'WC_Widget_Cart', 'title=' ) ?>
 				</div>
 				<div class="clearfix"> </div>
 			</div>

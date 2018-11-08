@@ -53,3 +53,43 @@ function addToCartBottomSlider() {
 		$product, $args );
 	}
 }
+
+/**
+*	mini cart widget
+*/
+
+add_filter( 'woocommerce_add_to_cart_fragments', function ( $fragments ) {
+	$cart_subtotal = WC()->cart->get_cart_subtotal();
+	$cart_count = WC()->cart->get_cart_contents_count();
+	ob_start();
+	?>
+		<div class="cart box_1 widget_shopping_cart">
+			<?php if ( $cart_count > 0 ) : ?>
+				<a href="/cart">
+					<h3>
+						<span><?= $cart_subtotal  ?></span>
+						<span>( <?= $cart_count ?> )</span>
+						<img src="<?= bloginfo( 'template_url' ) ?>/assets/images/bag.png" alt="">
+					</h3>
+				</a>	
+				<p>
+					<a href="/cart?empty-cart" class="simpleCart_empty">Empty cart</a>
+				</p>
+			<?php else : ?>
+				<p>
+					<img src="<?= bloginfo( 'template_url' ) ?>/assets/images/bag.png" alt="">
+					<a href="javascript:;" class="simpleCart_empty"><?= _e( 'Cart is empty', 'shop' ) ?></a>
+				</p>
+			<?php endif; ?>
+			<div class="clearfix"></div>
+		</div>
+	<?php
+	$fragments['div.widget_shopping_cart'] = ob_get_clean();
+	return $fragments;
+} );
+
+// empty cart
+add_action( 'init', function () {
+	global $woocommerce;
+	if ( isset( $_GET['empty-cart'] ) ) $woocommerce->cart->empty_cart();
+} );
