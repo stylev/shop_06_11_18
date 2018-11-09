@@ -1,0 +1,93 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2018-11-09 10:25+0200\n"
+"PO-Revision-Date: 2018-11-09 10:25+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: .git\n"
+"X-Poedit-SearchPathExcluded-1: assets\n"
+"X-Poedit-SearchPathExcluded-2: lang\n"
+
+#: footer.php:6
+msgid "Footer widgets are here"
+msgstr ""
+
+#: footer.php:15
+#, php-format
+msgid "Eshop. All Rights Reserved %s Design by"
+msgstr "Eshop. Все права защищены %s Дизайн"
+
+#: header.php:22
+msgid "Login"
+msgstr "Логин"
+
+#: header.php:23
+msgid "Create an Account"
+msgstr "Создать аккаунт"
+
+#: header.php:25
+msgid "Logout"
+msgstr "Выйти"
+
+#: inc/shop-widgets.php:4 inc/shop-widgets.php:6
+msgid "Footer widget"
+msgstr ""
+
+#: inc/wc-functions.php:77
+msgid "Empty cart"
+msgstr "Очистить корзину"
+
+#: inc/wc-functions.php:82
+msgid "Cart is empty"
+msgstr "Корзина пуста"
+
+#: inc/wc-functions.php:107
+msgid "Back to Previous Page"
+msgstr ""
+
+#: page.php:12
+msgid "MY SHOPPING BAG"
+msgstr ""
+
+#: searchform.php:4
+msgid "Store search"
+msgstr "Поиск по магазину"
+
+#: searchform.php:7
+msgid "Enter Your Search phrase"
+msgstr "Введите фразу для поиска"
+
+#: searchform.php:8
+msgid "Search"
+msgstr "Поиск"
+
+#: template-parts/bottom-slider.php:3
+msgid "Featured Collection"
+msgstr "Избранные коллекции"
+
+#: woocommerce/cart/cart.php:24
+msgid "Remove this item"
+msgstr ""
+
+#: woocommerce/cart/cart.php:63
+msgid "Price"
+msgstr ""
+
+#: woocommerce/cart/cart.php:94
+msgid "Total"
+msgstr ""
+
+#: woocommerce/content-product.php:21
+msgid "Quick View"
+msgstr "Подробнее"

@@ -66,7 +66,7 @@ add_filter( 'woocommerce_add_to_cart_fragments', function ( $fragments ) {
 	?>
 		<div class="cart box_1 widget_shopping_cart">
 			<?php if ( $cart_count > 0 ) : ?>
-				<a href="/cart">
+				<a href="<?= wc_get_cart_url() ?>">
 					<h3>
 						<span><?= $cart_subtotal  ?></span>
 						<span>( <?= $cart_count ?> )</span>
@@ -74,12 +74,12 @@ add_filter( 'woocommerce_add_to_cart_fragments', function ( $fragments ) {
 					</h3>
 				</a>	
 				<p>
-					<a href="/cart?empty-cart" class="simpleCart_empty">Empty cart</a>
+					<a href="<?= wc_get_cart_url() ?>?empty-cart" class="simpleCart_empty"><?php _e( 'Empty cart', 'shop' ) ?></a>
 				</p>
 			<?php else : ?>
 				<p>
 					<img src="<?= bloginfo( 'template_url' ) ?>/assets/images/bag.png" alt="">
-					<a href="javascript:;" class="simpleCart_empty"><?= _e( 'Cart is empty', 'shop' ) ?></a>
+					<?= _e( 'Cart is empty', 'shop' ) ?>
 				</p>
 			<?php endif; ?>
 			<div class="clearfix"></div>
@@ -90,10 +90,12 @@ add_filter( 'woocommerce_add_to_cart_fragments', function ( $fragments ) {
 } );
 
 // empty cart
-add_action( 'init', function () {
+add_action( 'init', 'shopEmptyCart' );
+
+function shopEmptyCart() {
 	global $woocommerce;
 	if ( isset( $_GET['empty-cart'] ) ) $woocommerce->cart->empty_cart();
-} );
+}
 
 /**
 *	breadcrumbs
