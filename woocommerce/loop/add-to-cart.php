@@ -12,7 +12,7 @@ if ( is_shop() ) {
 			esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
 			esc_attr( isset( $args['class'] ) ? $args['class'] : 'button' ),
 			isset( $args['attributes'] ) ? wc_implode_html_attributes( $args['attributes'] ) : '',
-			$product->get_price_html()
+			shopGetPriceHtml()
 		),
 	$product, $args );
 } else {

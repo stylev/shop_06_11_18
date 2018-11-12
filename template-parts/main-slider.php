@@ -29,7 +29,7 @@
 			<div class="clearfix"> </div>
 		</div>
 		<div class="shop">
-			<a href="single.html">SHOP COLLECTION NOW</a>
+			<a href="<?= home_url() ?>"><?= _e( 'shop collection now', 'shop' ) ?></a>
 		</div>
 	</div>
 </div>

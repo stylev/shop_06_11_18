@@ -40,4 +40,11 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_enqueue_script( 'shop_flexisel_scripts' );
 	wp_enqueue_script( 'shop_flexslider_scripts' );
 	wp_enqueue_script( 'shop_scripts' );
+	wp_localize_script( 
+		'shop_scripts', 
+		'shopObj', 
+		[
+			'bgImage' => get_option( 'shop_option_name' )['bg_image']
+		]
+	);
 } );

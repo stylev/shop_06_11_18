@@ -49,7 +49,7 @@ function addToCartBottomSlider() {
 				esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
 				esc_attr( isset( $args['class'] ) ? $args['class'] : 'button' ),
 				isset( $args['attributes'] ) ? wc_implode_html_attributes( $args['attributes'] ) : '',
-				$product->get_price_html()
+				shopGetPriceHtml()
 			),
 		$product, $args );
 	}
@@ -124,4 +124,72 @@ add_filter( 'woocommerce_breadcrumb_defaults', function ( $args ) {
 	}
 	return $args;
 } );
-	
+
+/**
+*	change currency
+*/
+
+add_filter( 'woocommerce_get_price_html', function ( $price, $product ) {
+
+	return $price;
+}, '', 2 );
+
+function shopGetPriceHtml() {
+	global $product;
+	$exchange_rate = get_option( 'shop_option_name' )['exchange_rate'];
+	$cur_symbol = get_locale() == 'ru_RU' ? get_woocommerce_currency_symbol( 'UAH' ) : get_woocommerce_currency_symbol( 'USD' );
+	$reg_price = get_locale() == 'ru_RU' ? number_format( round( $product->get_regular_price() * $exchange_rate, 2 ), 2 ) : number_format( (float)$product->get_regular_price(), 2 );
+	$sale_price = get_locale() == 'ru_RU' && $product->get_sale_price() ? number_format( round( $product->get_sale_price() * $exchange_rate, 2 ), 2 ) : number_format( (float)$product->get_sale_price(), 2 );
+	if ( get_post_meta( $product->get_id(), '_translation_porduct_type', true ) == 'grouped' ) {
+		$prices = [];
+		$children = $product->get_children();
+		foreach ( $children as $item ) {
+			$prices[] = get_post_custom( $item )['_regular_price'][0];
+		}
+		sort( $prices );
+		$first_product_price = get_locale() == 'ru_RU' ? number_format( round( $prices[0] * $exchange_rate, 2 ), 2 ) : number_format( $prices[0], 2 );
+		$last_product_price = get_locale() == 'ru_RU' ? number_format( round( $prices[count( $prices ) - 1] * $exchange_rate, 2 ), 2 ) : number_format( $prices[count( $prices ) - 1], 2 );
+	} elseif ( get_post_meta( $product->get_id(), '_translation_porduct_type', true ) == 'variable' ) {
+		$prices = [];
+		$get_prices = get_post_meta( $product->get_id(), '_price', false );
+		foreach ( $get_prices as $item ) {
+			$prices[] = $item;
+		}
+		sort( $prices );
+		$first_product_price = get_locale() == 'ru_RU' ? number_format( round( $prices[0] * $exchange_rate, 2 ), 2 ) : number_format( $prices[0], 2 );
+		$last_product_price = get_locale() == 'ru_RU' ? number_format( round( $prices[count( $prices ) - 1] * $exchange_rate, 2 ), 2 ) : number_format( $prices[count( $prices ) - 1], 2 );
+	}
+	ob_start();
+	?>
+		<?php if ( $sale_price > 0 ) : ?>
+			<span class="item_price">
+				<del>
+					<span class="woocommerce-Price-amount amount">
+						<span class="woocommerce-Price-currencySymbol"><?= $cur_symbol ?></span><?= $reg_price ?>
+					</span>
+				</del>
+				<ins>
+					<span class="woocommerce-Price-amount amount">
+						<span class="woocommerce-Price-currencySymbol">&nbsp;<?= $cur_symbol ?></span><?= $sale_price ?>
+					</span>
+				</ins>
+			</span>
+		<?php elseif ( get_post_meta( $product->get_id(), '_translation_porduct_type', true ) == 'grouped' || get_post_meta( $product->get_id(), '_translation_porduct_type', true ) == 'variable' ) : ?>
+			<span class="item_price">
+				<span class="woocommerce-Price-amount amount">
+					<span class="woocommerce-Price-currencySymbol"><?= $cur_symbol ?></span><?= $first_product_price ?>
+				</span> – <span class="woocommerce-Price-amount amount">
+					<span class="woocommerce-Price-currencySymbol"><?= $cur_symbol ?></span><?= $last_product_price ?>
+				</span>
+			</span>
+		<?php else : ?>
+			<span class="item_price">
+				<span class="woocommerce-Price-amount amount">
+					<span class="woocommerce-Price-currencySymbol"><?= $cur_symbol ?></span><?= $reg_price ?>
+				</span>
+			</span>
+		<?php endif; ?>
+	<?php
+	$price = ob_get_clean();
+	return $price;
+}

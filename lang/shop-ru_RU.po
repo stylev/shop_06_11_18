@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-11-09 10:25+0200\n"
-"PO-Revision-Date: 2018-11-09 10:25+0200\n"
+"POT-Creation-Date: 2018-11-12 08:47+0200\n"
+"PO-Revision-Date: 2018-11-12 08:48+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -28,6 +28,22 @@ msgstr ""
 msgid "Eshop. All Rights Reserved %s Design by"
 msgstr "Eshop. Все права защищены %s Дизайн"
 
+#: functions.php:64
+msgid "Slider"
+msgstr ""
+
+#: functions.php:65
+msgid "All slides"
+msgstr ""
+
+#: functions.php:66
+msgid "Add new slide"
+msgstr ""
+
+#: functions.php:67
+msgid "New slide"
+msgstr ""
+
 #: header.php:22
 msgid "Login"
 msgstr "Логин"
@@ -39,6 +55,18 @@ msgstr "Создать аккаунт"
 #: header.php:25
 msgid "Logout"
 msgstr "Выйти"
+
+#: inc/shop-settings-page.php:6 inc/shop-settings-page.php:7
+msgid "Shop settings"
+msgstr ""
+
+#: inc/shop-settings-page.php:42
+msgid "Sliders button title"
+msgstr ""
+
+#: inc/shop-settings-page.php:45 template-parts/main-slider.php:33
+msgid "shop collection now"
+msgstr "коллекция покупок сейчас"
 
 #: inc/shop-widgets.php:4 inc/shop-widgets.php:6
 msgid "Footer widget"
@@ -52,7 +80,7 @@ msgstr "Очистить корзину"
 msgid "Cart is empty"
 msgstr "Корзина пуста"
 
-#: inc/wc-functions.php:107
+#: inc/wc-functions.php:109
 msgid "Back to Previous Page"
 msgstr ""
 

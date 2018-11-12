@@ -69,5 +69,8 @@ jQuery(document).ready(function($) {
 		$('.cart-header3').fadeOut('slow', function(c){
 			$('.cart-header3').remove();
 		});
-	});	 
+	});
+
 });
+// bg image
+document.querySelector('.banner').style.cssText = 'background: url(' + shopObj.bgImage + ') no-repeat center; background-size: cover;';
