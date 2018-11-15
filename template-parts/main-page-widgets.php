@@ -4,7 +4,7 @@
 	</div>
 	<div class="col-md-4 shipping-grid">
 		<div class="shipping">
-			<img src="<?= bloginfo( 'template_url' ) ?>/assets/images/shipping.png" alt="" />
+			<?= getImage( SHOP_DIR_URI . 'assets/images/shipping.png' ) ?>
 		</div>
 		<div class="shipping-text">
 			<h3><?= __( 'Free Shipping', 'shop' ) ?></h3>

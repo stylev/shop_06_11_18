@@ -9,14 +9,13 @@
 				</div>
 			</div>
 			<div class="cards text-center">
-				<img src="<?= bloginfo( 'template_url' ) ?>/assets/images/cards.jpg" alt="" />
+				<?= getImage( SHOP_DIR_URI . 'assets/images/cards.jpg' ) ?>
 			</div>
 			<div class="copyright text-center">
 				<p>&copy; <?= date( 'Y' ) ?> <?php printf( __( 'Eshop. All Rights Reserved %s Design by', 'shop' ), '|' ) ?>   <a href="http://w3layouts.com">  W3layouts</a></p>
 			</div>
 		</div>
 	</div>
-	<link rel="stylesheet" href="<?= bloginfo( 'template_url' ) ?>/assets/css/flexslider.min.css" type="text/css" media="screen" />
 	<?= wp_footer() ?>
 </body>
 </html>

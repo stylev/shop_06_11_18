@@ -9,8 +9,28 @@ add_filter( 'loop_shop_per_page', function ( $count ) {
 *	product image, adding image sizes
 */
 
-function getProductImage( $size = '', $attr = [] ) {
-	if ( has_post_thumbnail() ) $img = the_post_thumbnail( $size, $attr );
+function getImage( $src, $alt = '', $attr = '' ) {
+	$attributes = '';
+	$class = 'lazy';
+	if ( ! empty( $attr ) ) {
+		foreach ( $attr as $k => $v ) {
+			if ( $k == 'class' ) $class .= ' ' . $v;
+			else $attributes .= $k . '="' . $v . '"';
+		}
+	}
+	ob_start();
+	?>
+		<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="<?= $class ?>" data-src="<?= $src ?>" alt='<?= $alt ?>' <?= $attributes ?>>
+	<?php
+	$img = ob_get_clean();
+	return $img;
+}
+
+function getProductImage( $size = '', $attr = '' ) {
+	if ( has_post_thumbnail() ) {
+		$src = get_the_post_thumbnail_url( get_the_ID(), $size );
+		$img = getImage( $src, '', $attr );
+	}
 	else $img = wc_placeholder_img( $size );
 	return $img;
 }

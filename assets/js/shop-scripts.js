@@ -70,7 +70,17 @@ jQuery(document).ready(function($) {
 			$('.cart-header3').remove();
 		});
 	});
-
+	
+	// bg image
+	if (shopObj.bgImage != null) {
+		$('.banner').css({
+			'background': 'url(' + shopObj.bgImage + ') no-repeat center',
+			'background-size': 'cover'
+		});
+	} else {
+		$('.banner').css({
+			'background': 'url("../images/banner_img.jpg") no-repeat center',
+			'background-size': 'cover'
+		});
+	}
 });
-// bg image
-document.querySelector('.banner').style.cssText = 'background: url(' + shopObj.bgImage + ') no-repeat center; background-size: cover;';
