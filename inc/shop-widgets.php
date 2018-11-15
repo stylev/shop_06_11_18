@@ -14,6 +14,20 @@ add_filter( 'widget_nav_menu_args', function ( $nav_menu_args, $nav_menu, $args,
 	if ( $args['id'] == 'footer_widgets' ) {
 		$nav_menu_args['container'] = '';
 		$nav_menu_args['menu_class'] = 'f_nav';
+	} elseif ( $args['id'] == 'sidebar_widget' ) {
+		$nav_menu_args['container'] = '';
+		$nav_menu_args['menu_class'] = 'product-list';
 	}
 	return $nav_menu_args;
 }, '', 4 );
+
+// sidebar widget
+register_sidebar( [
+	'name' => __( 'Sidebar widget', 'shop' ),
+	'id' => 'sidebar_widget',
+	'description' => __( 'Sidebar widget', 'shop' ),
+	'before_widget' => '<div class="product-listy">',
+	'after_widget' => '</div>',
+	'before_title' => '<h2>',
+	'after_title' => '</h2>'
+] );

@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! empty( $breadcrumb ) ) {
+if ( ! empty( $breadcrumb ) ) {		
 
 	if ( is_product_category() ) {
 		echo $wrap_before;
@@ -16,7 +16,7 @@ if ( ! empty( $breadcrumb ) ) {
 			if ( ! empty( $crumb[1] ) && sizeof( $breadcrumb ) !== $key + 1 ) {
 				echo '<a href="' . esc_url( $crumb[1] ) . '">' . esc_html( $crumb[0] ) . '</a>';
 			} else {
-				echo esc_html( $crumb[0] );
+				echo '<span class="act">' . esc_html( $crumb[0] ) . '</span>&nbsp;';
 			}
 
 			echo $after;

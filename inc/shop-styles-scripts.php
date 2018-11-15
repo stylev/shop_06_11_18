@@ -111,6 +111,24 @@ add_action( 'wp_enqueue_scripts', function () {
 		false,
 		true
 	);
+	if ( is_product_category() ) {
+		wp_register_script( 
+			'shop_cbpViewModeSwitch_scripts', 
+			SHOP_DIR_URI . 'assets/js/cbpViewModeSwitch.min.js',
+			['jquery'],
+			false,
+			true
+		);
+		wp_register_script( 
+			'shop_classie_scripts', 
+			SHOP_DIR_URI . 'assets/js/classie.min.js',
+			['jquery'],
+			false,
+			true
+		);
+		wp_enqueue_script( 'shop_cbpViewModeSwitch_scripts' );
+		wp_enqueue_script( 'shop_classie_scripts' );
+	}
 	wp_enqueue_script( 'shop_bootstrap_scripts' );
 	wp_enqueue_script( 'shop_responsiveslides_scripts' );
 	wp_enqueue_script( 'shop_flexisel_scripts' );
@@ -147,5 +165,14 @@ add_action( 'get_footer', function () {
 			WP_PLUGIN_URL . '/woocommerce/assets/css/woocommerce.css'
 		);
 		wp_enqueue_style( 'shop_woocommerce_styles' );
+		wp_enqueue_style( 'shop_select2_styles' );
+	}
+
+	if ( is_product_category()) {
+		wp_register_style( 
+			'shop_component_styles', 
+			SHOP_DIR_URI . 'assets/css/component.min.css'
+		);
+		wp_enqueue_style( 'shop_component_styles' );
 	}
 } );

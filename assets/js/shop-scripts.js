@@ -83,4 +83,20 @@ jQuery(document).ready(function($) {
 			'background-size': 'cover'
 		});
 	}
-});
+
+	// product category, show per page
+	$('.product-cat-per-page').on('change', function () {
+		var count = $(this).val(),
+			parts = window.location.search.substring(1).split('&'),
+			args = {};
+		for (let i = 0; i < parts.length; i++) {
+			var pos = parts[i].indexOf('=');
+			if (pos == -1) continue;
+			var key = parts[i].substring(0, pos),
+				value = parts[i].substring(pos + 1);
+			args[key] = value;
+		}
+		args['ppp'] = count;
+		window.location.href = '?' + $.param(args);
+	});
+});	

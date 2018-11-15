@@ -2,6 +2,7 @@
 // products per page
 add_filter( 'loop_shop_per_page', function ( $count ) {
 	if ( is_shop() ) $count = 6;
+	if ( is_product_category() ) $count = $_GET['ppp']?? 3;
 	return $count;
 } );
 
@@ -38,6 +39,18 @@ function getProductImage( $size = '', $attr = '' ) {
 add_image_size( 'shop_page_loop_img', 349, 349, true );
 add_image_size( 'bottom_slider_img', 277, 396, true );
 add_image_size( 'cart_img', 228, 228, true );
+
+/**
+*	sale size
+*/
+
+function getSaleSize() {
+	global $product;
+	$reg_price = $product->get_regular_price();
+	$sale_price = $product->get_sale_price();
+	$sale = ( $sale_price > 0 ) ? ceil( ( $reg_price - $sale_price ) / $reg_price * 100 ) : '';
+	return $sale;
+}
 
 /**
 *	bottom slider, add to cart
@@ -133,17 +146,30 @@ add_filter( 'woocommerce_breadcrumb_defaults', function ( $args ) {
 			'home'        => _x( 'Home', 'breadcrumb', 'woocommerce' )
 		];
 	} else {
+		$taxonomy = 'product_cat';
+		$terms = get_terms( [
+			'taxonomy' => $taxonomy,
+			'hide_empty' => true
+		] );
+		$terms_id = [];
+		foreach ( $terms as $item ) $terms_id[] = $item->term_id;
+		$cur_term = get_queried_object();
+		$next_term_pos = array_search( $cur_term->term_id, $terms_id ) + 1;
+		if ( $next_term_pos > count( $terms_id ) - 1 ) $next_term_pos = 0;
+		$next_term = get_term( $terms_id[$next_term_pos], $taxonomy );
+		$next_term_name = $next_term->name;
+		$next_term_url = get_term_link( $next_term->term_id, $taxonomy );
 		$args = [
 			'delimiter'   => '&nbsp;<span>&gt;</span>',
-			'wrap_before' => '<nav class="woocommerce-breadcrumb">',
-			'wrap_after'  => '</nav>',
-			'before'      => '',
-			'after'       => '',
+			'wrap_before' => '<div class="new-product-top"><ul class="product-top-list">',
+			'wrap_after'  => '</ul><p class="back"><a href="' . $next_term_url . '">' . $next_term_name . '</a></p><div class="clearfix"></div></div>',
+			'before'      => '<li>',
+			'after'       => '</li>',
 			'home'        => _x( 'Home', 'breadcrumb', 'woocommerce' )
 		];
 	}
 	return $args;
-} );
+} );	
 
 /**
 *	change currency
